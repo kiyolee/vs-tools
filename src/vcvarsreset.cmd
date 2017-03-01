@@ -1,0 +1,23 @@
+if "%PATH_PRE_VC%" == "" set PATH_PRE_VC=%PATH%
+Path %PATH_PRE_VC%
+set CommandPromptType=
+set DevEnvDir=
+set ExtensionSdkDir=
+set FSHARPINSTALLDIR=
+set Framework40Version=
+set FrameworkDIR32=
+set FrameworkDIR64=
+set FrameworkDir=
+set FrameworkVersion=
+set FrameworkVersion32=
+set FrameworkVersion64=
+set INCLUDE=
+set LIB=
+set LIBPATH=
+set Platform=
+set VCINSTALLDIR=
+set VSINSTALLDIR=
+set VisualStudioVersion=
+set WindowsSDK_ExecutablePath_x64=
+set WindowsSDK_ExecutablePath_x86=
+set WindowsSdkDir=
