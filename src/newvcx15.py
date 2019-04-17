@@ -23,7 +23,6 @@ DEFAULT_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
   <PropertyGroup Label="Globals">
     <ProjectGuid>%{GUID}%</ProjectGuid>
     <RootNamespace>%{NAME}%</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -108,7 +107,6 @@ DEFAULT_64_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
   <PropertyGroup Label="Globals">
     <ProjectGuid>%{GUID}%</ProjectGuid>
     <RootNamespace>%{NAME}%</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
