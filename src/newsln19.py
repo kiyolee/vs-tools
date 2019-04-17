@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# newsln17.py
+# newsln19.py
 #
 
 import sys
@@ -8,8 +8,8 @@ import os
 
 DEFAULT_SLN = r'''
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Global
 	GlobalSection(SolutionProperties) = preSolution
