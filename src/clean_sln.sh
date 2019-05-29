@@ -23,6 +23,7 @@ clean_sln(){
       -o -name '*.ilk' \
       -o -name '*.intermediate.manifest' \
       -o -name '*.iobj' \
+      -o -name '*.ipch' \
       -o -name '*.ipdb' \
       -o -name '*.lastbuildstate' \
       -o -name '*.lastcodeanalysissucceeded' \
@@ -33,6 +34,7 @@ clean_sln(){
       -o -name '*.pdb' \
       -o -name '*.tlog' \
       -o -name '*.unsuccessfulbuild' \
+      -o -name '*.vcxproj.FileListAbsolute.txt' \
       -o -name '*.vcxprojResolveAssemblyReference.cache' \
       -o -name '*_manifest.rc' \
       -o -name 'BuildLog.htm' \
