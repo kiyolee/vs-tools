@@ -12,9 +12,9 @@ set TARGET=Build
 :nexttarget
 
 for %%p in ( Win32 x64 ) do (
-for %%c in ( Release Debug ) do (
-  msbuild %SLN% /m /t:%TARGET% /p:Platform=%%p /p:Configuration=%%c
-)
+  for %%c in ( Release Debug ) do (
+    msbuild %SLN% /m /t:%TARGET% /p:Platform=%%p /p:Configuration=%%c
+  )
 )
 
 :end
