@@ -10,9 +10,15 @@ clean_sln(){
   SLNDIR="$1"
   [ ! -d "$SLNDIR" ] && return 1
   if [ $FOR_REAL -eq 0 ]; then
-    ECHO_CMD=echo
+    RM_FRONT="-exec echo rm -v {} ;"
+    RM_BACK="cat"
+    RMDIR_FRONT="-exec echo rmdir -v {} ;"
+    RMDIR_BACK="cat"
   else
-    ECHO_CMD=
+    RM_FRONT="-print0"
+    RM_BACK="xargs -r -0 -n 1000 rm -v"
+    RMDIR_FRONT="-print0"
+    RMDIR_BACK="xargs -r -0 -n 1000 rmdir -v"
   fi
   find "$SLNDIR" -type f \( \
       -false \
@@ -41,8 +47,11 @@ clean_sln(){
       -o -name 'mt.dep' \
       -o -name 'unsuccessfulbuild' \
       -o \( -name '*.sbr' -a -size 0 \) \
-      \) -exec $ECHO_CMD rm -v {} \;
-  find "$SLNDIR" -depth -mindepth 1 -type d -empty ! -regex '.*\/\.\(svn\|git\|bzr\|hg\)\/.*' -exec $ECHO_CMD rmdir -v {} \;
+      \) \
+      $RM_FRONT | $RM_BACK
+  find "$SLNDIR" -depth -mindepth 1 -type d \
+      -empty ! -regex '.*\/\.\(svn\|git\|bzr\|hg\)\/.*' \
+      $RMDIR_FRONT | $RMDIR_BACK
 }
 
 if [ $# -gt 0 ]; then
