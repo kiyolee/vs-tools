@@ -42,7 +42,7 @@ def get_files(prj):
     else:
         fs = iter_files(prj)
     for f in fs:
-        if HEADING: print('  ')
+        if HEADING: print('  ', end='')
         print(f)
 
 def main():
