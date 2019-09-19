@@ -12,6 +12,7 @@ IS_WIN = platform.system() == 'Windows'
 PREPEND_ROOT = False
 SORT = False
 HEADING = False
+HEADING_ALWAYS = False
 EXISTS = False
 MISSING = False
 
@@ -35,27 +36,31 @@ def iter_files(prj):
             yield os.path.join(rp, *fp)
 
 def get_files(prj):
-    if HEADING: print(prj + ':')
     if SORT:
         fs = list(iter_files(prj))
         fs.sort()
     else:
         fs = iter_files(prj)
+    if HEADING_ALWAYS: print(prj + ':')
+    head_printed = HEADING_ALWAYS
     for f in fs:
-        if HEADING: print('  ', end='')
+        if not head_printed and HEADING:
+            print(prj + ':')
+            head_printed = True
+        if HEADING or HEADING_ALWAYS: print('  ', end='')
         print(f)
 
 def main():
     import getopt
     args = []
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'pshEM',
-            [ 'prepend-root', 'sort', 'heading', 'exists', 'missing' ])
+        opts, args = getopt.getopt(sys.argv[1:], 'pshHEM',
+            [ 'prepend-root', 'sort', 'heading', 'heading-always', 'exists', 'missing' ])
     except getopt.error as errmsg:
         print(errmsg)
         return 255
 
-    global PREPEND_ROOT, SORT, HEADING, EXISTS, MISSING
+    global PREPEND_ROOT, SORT, HEADING, HEADING_ALWAYS, EXISTS, MISSING
 
     for opt, val in opts:
         if opt in ( '-p', '--prepend-root' ):
@@ -64,6 +69,8 @@ def main():
             SORT = True
         elif opt in ( '-h', '--heading' ):
             HEADING = True
+        elif opt in ( '-H', '--heading-always' ):
+            HEADING_ALWAYS = True
         elif opt in ( '-E', '--exists' ):
             EXISTS = True
             MISSING = False
