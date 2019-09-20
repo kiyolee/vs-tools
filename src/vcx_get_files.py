@@ -5,9 +5,6 @@
 
 import os
 import sys
-import platform
-
-IS_WIN = platform.system() == 'Windows'
 
 PREPEND_ROOT = False
 SORT = False
