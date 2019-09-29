@@ -17,8 +17,10 @@ clean_sln(){
   else
     RM_FRONT="-print0"
     RM_BACK="xargs -r -0 -n 1000 rm -v"
-    RMDIR_FRONT="-print0"
-    RMDIR_BACK="xargs -r -0 -n 1000 rmdir -v"
+    #RMDIR_FRONT="-print0"
+    #RMDIR_BACK="xargs -r -0 -n 1000 rmdir -v"
+    RMDIR_FRONT="-exec rmdir -v {} ;"
+    RMDIR_BACK="cat"
   fi
   find "$SLNDIR" -type f \( \
       -false \
