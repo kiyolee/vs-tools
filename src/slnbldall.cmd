@@ -6,14 +6,21 @@ set SLN=%1
 
 if .%2. == .. goto :notarget
 set TARGET=%2
-goto :nexttarget
+goto :havetarget
 :notarget
 set TARGET=Build
-:nexttarget
+:havetarget
+
+if .%3. == .. goto :nomaxcpu
+set _MAXCPU_OPT=-m:%3
+goto :havemaxcpu
+:nomaxcpu
+set _MAXCPU_OPT=-m
+:havemaxcpu
 
 for %%p in ( Win32 x64 ) do (
   for %%c in ( Release Debug ) do (
-    msbuild %SLN% /m /t:%TARGET% /p:Platform=%%p /p:Configuration=%%c
+    msbuild -t:%TARGET% -p:Platform=%%p -p:Configuration=%%c %_MAXCPU_OPT% %SLN%
   )
 )
 
