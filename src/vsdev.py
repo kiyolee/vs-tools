@@ -46,6 +46,7 @@ import sys
 
 import os
 import subprocess
+import re
 import winreg
 
 # __file__ is not defined after compiled with cx_Freeze
@@ -254,6 +255,80 @@ def print_devenvs(devenvs, devdef):
     else:
         print('No Visual Studio found.')
 
+def clean_env():
+    env = dict(os.environ)
+    for i in [ 'CommandPromptType',
+               'DevEnvDir',
+               'ExtensionSdkDir',
+               'FSHARPINSTALLDIR',
+               'Framework35Version',
+               'Framework40Version',
+               'FrameworkDIR32',
+               'FrameworkDIR64',
+               'FrameworkDir',
+               'FrameworkVersion32',
+               'FrameworkVersion64',
+               'FrameworkVersion',
+               'HTMLHelpDir',
+               'IFCPATH',
+               'INCLUDE',
+               'LIB',
+               'LIBPATH',
+               'NETFXSDKDir',
+               'Platform',
+               'UCRTVersion',
+               'UniversalCRTSdkDir',
+               'VCIDEInstallDir',
+               'VCINSTALLDIR',
+               'VCToolsInstallDir',
+               'VCToolsRedistDir',
+               'VCToolsVersion',
+               'VSCMD_ARG_HOST_ARCH',
+               'VSCMD_ARG_TGT_ARCH',
+               'VSCMD_ARG_app_plat',
+               'VSCMD_VER',
+               'VSINSTALLDIR',
+               'VSSDKINSTALL',
+               'VisualStudioVersion',
+               'WindowsLibPath',
+               'WindowsSDKLibVersion',
+               'WindowsSDKVersion',
+               'WindowsSDK_ExecutablePath_x64',
+               'WindowsSDK_ExecutablePath_x86',
+               'WindowsSdkBinPath',
+               'WindowsSdkDir',
+               'WindowsSdkVerBinPath',
+               '__DOTNET_ADD_32BIT',
+               '__DOTNET_ADD_64BIT',
+               '__DOTNET_PREFERRED_BITNESS',
+               '__VSCMD_PREINIT_PATH',
+               '__VSCMD_PREINIT_VS150COMNTOOLS',
+               '__VSCMD_PREINIT_VS160COMNTOOLS',
+               '__VSCMD_script_err_count' ]:
+        if i in env: del env[i]
+    env['PreferredToolArchitecture'] = 'x64'
+    try:
+        h = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r'SYSTEM\ControlSet001\Control\Session Manager\Environment', 0, winreg.KEY_READ)
+        syspath, t = winreg.QueryValueEx(h, 'Path')
+        assert t == winreg.REG_EXPAND_SZ
+    except WindowsError:
+        syspath = ''
+    try:
+        h = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Environment', 0, winreg.KEY_READ)
+        usrpath, t = winreg.QueryValueEx(h, 'Path')
+        assert t == winreg.REG_EXPAND_SZ
+    except WindowsError:
+        usrpath = ''
+    if syspath and usrpath:
+        def _repl(match):
+            v = match.group('var')
+            if not v: return '%'
+            if not v in env: return match.match
+            return env[v]
+        pat = re.compile('%(?P<var>\w*)%')
+        env['Path'] = ';'.join([ re.sub(pat, _repl, p ) for p in ( syspath.split(';') + usrpath.split(';') ) if p ])
+    return env
+
 def main():
     devenvs = get_devenv_list()
     devdef = default_devenv(devenvs)
@@ -293,7 +368,8 @@ def main():
     if not devsel: devsel = devdef
     devenv = devenvs[devsel]
 
-    os.execv(devenv, [ '"' + devenv + '"' ] + [ '"' + a + '"' for a in args ])
+    os.execve(devenv, [ '"' + devenv + '"' ] + [ '"' + a + '"' for a in args ],
+              clean_env())
 
     return 0
 
