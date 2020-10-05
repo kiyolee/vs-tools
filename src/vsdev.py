@@ -33,6 +33,7 @@ options:
     --msvc6, --vc6
         Start MSVC6 if available.
     --vs(2003|2005|2008|2010|2012|2013|2015|2017|2019)
+    --(2003|2005|2008|2010|2012|2013|2015|2017|2019)
         Start specific version of Visual Studio if available.
     -h, --help
         Print this help.
@@ -42,7 +43,7 @@ usage 2: %(__file__)s [-l|--list]
 """
 
 import sys
-#assert sys.platform == 'win32'
+assert sys.platform == 'win32'
 
 import os
 import subprocess
