@@ -47,6 +47,7 @@ import sys
 import os
 import subprocess
 import re
+import nt
 import winreg
 
 # __file__ is not defined after compiled with cx_Freeze
@@ -256,57 +257,61 @@ def print_devenvs(devenvs, devdef):
         print('No Visual Studio found.')
 
 def clean_env():
-    env = dict(os.environ)
-    for i in [ 'CommandPromptType',
-               'DevEnvDir',
-               'ExtensionSdkDir',
-               'FSHARPINSTALLDIR',
-               'Framework35Version',
-               'Framework40Version',
-               'FrameworkDIR32',
-               'FrameworkDIR64',
-               'FrameworkDir',
-               'FrameworkVersion32',
-               'FrameworkVersion64',
-               'FrameworkVersion',
-               'HTMLHelpDir',
-               'IFCPATH',
-               'INCLUDE',
-               'LIB',
-               'LIBPATH',
-               'NETFXSDKDir',
-               'Platform',
-               'UCRTVersion',
-               'UniversalCRTSdkDir',
-               'VCIDEInstallDir',
-               'VCINSTALLDIR',
-               'VCToolsInstallDir',
-               'VCToolsRedistDir',
-               'VCToolsVersion',
-               'VSCMD_ARG_HOST_ARCH',
-               'VSCMD_ARG_TGT_ARCH',
-               'VSCMD_ARG_app_plat',
-               'VSCMD_VER',
-               'VSINSTALLDIR',
-               'VSSDKINSTALL',
-               'VisualStudioVersion',
-               'WindowsLibPath',
-               'WindowsSDKLibVersion',
-               'WindowsSDKVersion',
-               'WindowsSDK_ExecutablePath_x64',
-               'WindowsSDK_ExecutablePath_x86',
-               'WindowsSdkBinPath',
-               'WindowsSdkDir',
-               'WindowsSdkVerBinPath',
-               '__DOTNET_ADD_32BIT',
-               '__DOTNET_ADD_64BIT',
-               '__DOTNET_PREFERRED_BITNESS',
-               '__VSCMD_PREINIT_PATH',
-               '__VSCMD_PREINIT_VS150COMNTOOLS',
-               '__VSCMD_PREINIT_VS160COMNTOOLS',
-               '__VSCMD_script_err_count' ]:
-        if i in env: del env[i]
-    env['PreferredToolArchitecture'] = 'x64'
+    REMOVE_LIST = [ 'CommandPromptType',
+                    'DevEnvDir',
+                    'ExtensionSdkDir',
+                    'FSHARPINSTALLDIR',
+                    'Framework35Version',
+                    'Framework40Version',
+                    'FrameworkDIR32',
+                    'FrameworkDIR64',
+                    'FrameworkDir',
+                    'FrameworkVersion32',
+                    'FrameworkVersion64',
+                    'FrameworkVersion',
+                    'HTMLHelpDir',
+                    'IFCPATH',
+                    'INCLUDE',
+                    'LIB',
+                    'LIBPATH',
+                    'NETFXSDKDir',
+                    'Platform',
+                    'UCRTVersion',
+                    'UniversalCRTSdkDir',
+                    'VCIDEInstallDir',
+                    'VCINSTALLDIR',
+                    'VCToolsInstallDir',
+                    'VCToolsRedistDir',
+                    'VCToolsVersion',
+                    'VSCMD_ARG_HOST_ARCH',
+                    'VSCMD_ARG_TGT_ARCH',
+                    'VSCMD_ARG_app_plat',
+                    'VSCMD_VER',
+                    'VSINSTALLDIR',
+                    'VSSDKINSTALL',
+                    'VisualStudioVersion',
+                    'WindowsLibPath',
+                    'WindowsSDKLibVersion',
+                    'WindowsSDKVersion',
+                    'WindowsSDK_ExecutablePath_x64',
+                    'WindowsSDK_ExecutablePath_x86',
+                    'WindowsSdkBinPath',
+                    'WindowsSdkDir',
+                    'WindowsSdkVerBinPath',
+                    '__DOTNET_ADD_32BIT',
+                    '__DOTNET_ADD_64BIT',
+                    '__DOTNET_PREFERRED_BITNESS',
+                    '__VSCMD_PREINIT_PATH',
+                    '__VSCMD_PREINIT_VS150COMNTOOLS',
+                    '__VSCMD_PREINIT_VS160COMNTOOLS',
+                    '__VSCMD_script_err_count' ]
+    env = dict(nt.environ)
+    km = dict([ ( k.upper(), k ) for k in env.keys() ])
+    for i in [ km[k.upper()] for k in REMOVE_LIST if k.upper() in km ]:
+        del env[i]
+    def _envkey(k):
+        return km.get(k.upper(), k)
+    env[_envkey('PreferredToolArchitecture')] = 'x64'
     try:
         h = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r'SYSTEM\ControlSet001\Control\Session Manager\Environment', 0, winreg.KEY_READ)
         syspath, t = winreg.QueryValueEx(h, 'Path')
@@ -320,13 +325,15 @@ def clean_env():
     except WindowsError:
         usrpath = ''
     if syspath and usrpath:
-        def _repl(match):
-            v = match.group('var')
+        def _repl(m):
+            v = m.group('var')
             if not v: return '%'
-            if not v in env: return match.match
-            return env[v]
+            kv = _envkey(v)
+            if kv in env: return env[kv]
+            s = m.span('var')
+            return m.string[s[0]-1:s[1]+1]
         pat = re.compile('%(?P<var>\w*)%')
-        env['Path'] = ';'.join([ re.sub(pat, _repl, p ) for p in ( syspath.split(';') + usrpath.split(';') ) if p ])
+        env[_envkey('Path')] = ';'.join([ re.sub(pat, _repl, p ) for p in ( syspath.split(';') + usrpath.split(';') ) if p ])
     return env
 
 def main():
