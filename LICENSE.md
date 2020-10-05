@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017 Kelvin Lee
+Copyright (c) 2017-2020 Kelvin Lee
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
