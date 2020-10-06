@@ -316,13 +316,13 @@ def clean_env():
     try:
         h = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r'SYSTEM\ControlSet001\Control\Session Manager\Environment', 0, winreg.KEY_READ)
         syspath, t = winreg.QueryValueEx(h, 'Path')
-        assert t == winreg.REG_EXPAND_SZ
+        assert t == winreg.REG_EXPAND_SZ or t == winreg.REG_SZ
     except WindowsError:
         syspath = ''
     try:
         h = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Environment', 0, winreg.KEY_READ)
         usrpath, t = winreg.QueryValueEx(h, 'Path')
-        assert t == winreg.REG_EXPAND_SZ
+        assert t == winreg.REG_EXPAND_SZ or t == winreg.REG_SZ
     except WindowsError:
         usrpath = ''
     if syspath and usrpath:
@@ -376,8 +376,11 @@ def main():
     if not devsel: devsel = devdef
     devenv = devenvs[devsel]
 
-    os.execve(devenv, [ '"' + devenv + '"' ] + [ '"' + a + '"' for a in args ],
-              clean_env())
+    if sys.version_info.major < 3 or (sys.version_info.major == 3 and sys.version_info.minor <= 4):
+        # On XP where Pythin latest version is 3.4, execve() crashes.
+        os.execv(devenv, [ '"' + devenv + '"' ] + [ '"' + a + '"' for a in args ])
+    else:
+        os.execve(devenv, [ '"' + devenv + '"' ] + [ '"' + a + '"' for a in args ], clean_env())
 
     return 0
 
