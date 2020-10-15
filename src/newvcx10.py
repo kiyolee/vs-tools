@@ -76,7 +76,7 @@ DEFAULT_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
   </ImportGroup>
 </Project>'''
 
-DEFAULT_64_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
+DEFAULT_VCXPROJ_64 = r'''<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -193,7 +193,7 @@ DEFAULT_64_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
   </ImportGroup>
 </Project>'''
 
-DEFAULT_FILTERS = r'''<?xml version="1.0" encoding="utf-8"?>
+DEFAULT_VCXPROJ_FILTERS = r'''<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -224,7 +224,7 @@ def new_uuid():
     return '{' + str(uuid.uuid4()).upper() + '}'
 
 def create_vcxproj(n, x64support):
-    default_vcxproj = DEFAULT_64_VCXPROJ if x64support else DEFAULT_VCXPROJ
+    default_vcxproj = DEFAULT_VCXPROJ_64 if x64support else DEFAULT_VCXPROJ
     bn = os.path.basename(n)
     vcxproj_fn = n + '.vcxproj'
     filters_fn = vcxproj_fn + '.filters'
@@ -235,7 +235,7 @@ def create_vcxproj(n, x64support):
     param = dict(NAME=bn, GUID=new_uuid())
     try:
         format_text(vcxproj_fn, default_vcxproj, param)
-        format_text(filters_fn, DEFAULT_FILTERS, param)
+        format_text(filters_fn, DEFAULT_VCXPROJ_FILTERS, param)
         print('created %s and %s.' % ( vcxproj_fn, filters_fn ))
     except IOError as e:
         print(e)
