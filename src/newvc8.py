@@ -12,9 +12,9 @@ DEFAULT_VCPROJ = r'''<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="%{NAME}%"
-	ProjectGUID="%{GUID}%"
-	RootNamespace="%{NAME}%"
+	Name="%{PROJNAME}%"
+	ProjectGUID="%{PROJGUID}%"
+	RootNamespace="%{PROJNAME}%"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -194,9 +194,9 @@ DEFAULT_64_VCPROJ = r'''<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="%{NAME}%"
-	ProjectGUID="%{GUID}%"
-	RootNamespace="%{NAME}%"
+	Name="%{PROJNAME}%"
+	ProjectGUID="%{PROJGUID}%"
+	RootNamespace="%{PROJNAME}%"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -525,16 +525,16 @@ def format_text(fn, text, param):
 def new_uuid():
     return '{' + str(uuid.uuid4()).upper() + '}'
 
-def create_vcproj(n, x64support):
-    default_vcproj = DEFAULT_64_VCPROJ if x64support else DEFAULT_VCPROJ
-    bn = os.path.basename(n)
-    vcproj_fn = n + '.vcproj'
+def create_vcproj(target, x64support):
+    projname = os.path.basename(target)
+    vcproj_fn = target + '.vcproj'
     for fn in [ vcproj_fn ]:
         if os.path.exists(fn):
             print('%s already exists!' % fn)
             return
-    param = dict(NAME=bn, GUID=new_uuid())
+    param = { 'PROJNAME': projname, 'PROJGUID': new_uuid() }
     try:
+        default_vcproj = DEFAULT_64_VCPROJ if x64support else DEFAULT_VCPROJ
         format_text(vcproj_fn, default_vcproj, param)
         print('created %s.' % vcproj_fn)
     except IOError as e:

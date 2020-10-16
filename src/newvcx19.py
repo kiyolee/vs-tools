@@ -22,8 +22,8 @@ DEFAULT_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>%{GUID}%</ProjectGuid>
-    <RootNamespace>%{NAME}%</RootNamespace>
+    <ProjectGuid>%{PROJGUID}%</ProjectGuid>
+    <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -105,8 +105,8 @@ DEFAULT_VCXPROJ_64 = r'''<?xml version="1.0" encoding="utf-8"?>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>%{GUID}%</ProjectGuid>
-    <RootNamespace>%{NAME}%</RootNamespace>
+    <ProjectGuid>%{PROJGUID}%</ProjectGuid>
+    <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -216,11 +216,11 @@ DEFAULT_VCXPROJ_FILTERS = r'''<?xml version="1.0" encoding="utf-8"?>
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
@@ -241,20 +241,20 @@ def format_text(fn, text, param):
 def new_uuid():
     return '{' + str(uuid.uuid4()).upper() + '}'
 
-def create_vcxproj(n, x64support):
-    default_vcxproj = DEFAULT_VCXPROJ_64 if x64support else DEFAULT_VCXPROJ
-    bn = os.path.basename(n)
-    vcxproj_fn = n + '.vcxproj'
-    filters_fn = vcxproj_fn + '.filters'
-    for fn in [ vcxproj_fn, filters_fn ]:
+def create_vcxproj(target, x64support):
+    projname = os.path.basename(target)
+    vcxproj_fn = target + '.vcxproj'
+    vcxproj_filters_fn = vcxproj_fn + '.filters'
+    for fn in [ vcxproj_fn, vcxproj_filters_fn ]:
         if os.path.exists(fn):
             print('%s already exists!' % fn)
             return
-    param = dict(NAME=bn, GUID=new_uuid())
+    param = { 'PROJNAME': projname, 'PROJGUID': new_uuid() }
     try:
+        default_vcxproj = DEFAULT_VCXPROJ_64 if x64support else DEFAULT_VCXPROJ
         format_text(vcxproj_fn, default_vcxproj, param)
-        format_text(filters_fn, DEFAULT_VCXPROJ_FILTERS, param)
-        print('created %s and %s.' % ( vcxproj_fn, filters_fn ))
+        format_text(vcxproj_filters_fn, DEFAULT_VCXPROJ_FILTERS, param)
+        print('created %s and %s.' % ( vcxproj_fn, vcxproj_filters_fn ))
     except IOError as e:
         print(e)
 
