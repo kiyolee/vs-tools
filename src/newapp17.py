@@ -265,20 +265,20 @@ Project("%{SLN_PROJGUID_U}%") = "%{PROJNAME}%", "%{PROJNAME}%\%{PROJNAME}%.vcxpr
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
 		Debug|Win32 = Debug|Win32
-		Release|x64 = Release|x64
+		Debug|x64 = Debug|x64
 		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		%{PROJGUID_U}%.Debug|x64.ActiveCfg = Debug|x64
-		%{PROJGUID_U}%.Debug|x64.Build.0 = Debug|x64
 		%{PROJGUID_U}%.Debug|Win32.ActiveCfg = Debug|Win32
 		%{PROJGUID_U}%.Debug|Win32.Build.0 = Debug|Win32
-		%{PROJGUID_U}%.Release|x64.ActiveCfg = Release|x64
-		%{PROJGUID_U}%.Release|x64.Build.0 = Release|x64
+		%{PROJGUID_U}%.Debug|x64.ActiveCfg = Debug|x64
+		%{PROJGUID_U}%.Debug|x64.Build.0 = Debug|x64
 		%{PROJGUID_U}%.Release|Win32.ActiveCfg = Release|Win32
 		%{PROJGUID_U}%.Release|Win32.Build.0 = Release|Win32
+		%{PROJGUID_U}%.Release|x64.ActiveCfg = Release|x64
+		%{PROJGUID_U}%.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
