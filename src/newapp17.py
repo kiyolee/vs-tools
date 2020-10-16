@@ -329,9 +329,6 @@ def create_vcxproj(target, x64support, src=None):
         if not slnname: slnname = projname
     else:
         projname = slnname
-    if not os.path.isdir(basedir):
-        print('Target directory "%s" does not exist.' % basedir, file=sys.stderr)
-        return
     if not slnname:
         print('Solution name not given or could not be deduced.', file=sys.stderr)
         return
@@ -374,7 +371,8 @@ def create_vcxproj(target, x64support, src=None):
     try:
         default_sln = DEFAULT_SLN_64 if x64support else DEFAULT_SLN
         default_vcxproj = DEFAULT_VCXPROJ_64 if x64support else DEFAULT_VCXPROJ
-        os.mkdir(projdir)
+        if not os.path.isdir(projdir):
+            os.makedirs(projdir)
         format_text(sln_fn, default_sln, param)
         format_text(vcxproj_fn, default_vcxproj, param)
         format_text(vcxproj_filters_fn, DEFAULT_VCXPROJ_FILTERS, param)
