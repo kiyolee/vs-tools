@@ -1,6 +1,6 @@
 @echo off
 setlocal
-set _VSVER_=VS2008
+set _VSVER_=VS2008-x64
 set _GCT_=
 set _CONTITLE_=
 for %%i in ( get_console_title.cmd ) do set "_GCT_=%%~$PATH:i"
@@ -16,6 +16,6 @@ set _CONTITLE_=%_VSVER_%
 title %_CONTITLE_%
 endlocal
 pushd .
-call vcvarsreset.cmd
+if exist "%~dp0\vcvarsreset.cmd" call "%~dp0\vcvarsreset.cmd"
 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\vc\vcvarsall.bat" amd64 %*
 popd

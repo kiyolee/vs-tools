@@ -16,5 +16,6 @@ set _CONTITLE_=%_VSVER_%
 title %_CONTITLE_%
 endlocal
 pushd .
+if exist "%~dp0\vcvarsreset.cmd" call "%~dp0\vcvarsreset.cmd"
 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\vc\vcvarsall.bat" amd64 %*
 popd
