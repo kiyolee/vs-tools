@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# setdbg.py: https://github.com/kiyolee/vs-tools.git
+# vsdev.py: https://github.com/kiyolee/vs-tools.git
 #
 # MIT License
 #
