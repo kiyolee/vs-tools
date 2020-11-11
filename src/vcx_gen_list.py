@@ -27,6 +27,10 @@ def get_dirs(fn):
             d.add(x)
     return d
 
+def join_dir(h, t):
+    if t: return os.path.join(h, t)
+    return h
+
 def main():
     src = []
     hdr = []
@@ -75,24 +79,24 @@ def main():
     flt = open('out.vcxproj.filters', 'w')
     print('  <ItemGroup>', file=flt)
     for d in sd:
-        print('    <Filter Include="Source Files\\' + d + '">', file=flt)
+        print('    <Filter Include="' + join_dir('Source Files', d) + '">', file=flt)
         print('      <UniqueIdentifier>' + new_uuid() + '</UniqueIdentifier>', file=flt)
         print('    </Filter>', file=flt)
     for d in hd:
-        print('    <Filter Include="Header Files\\' + d + '">', file=flt)
+        print('    <Filter Include="' + join_dir('Header Files', d) + '">', file=flt)
         print('      <UniqueIdentifier>' + new_uuid() + '</UniqueIdentifier>', file=flt)
         print('    </Filter>', file=flt)
     print('  </ItemGroup>', file=flt)
     print('  <ItemGroup>', file=flt)
     for f in src:
         print('    <ClCompile Include="' + os.path.join(PREFIX, f) + '">', file=flt)
-        print('      <Filter>Source Files\\' + os.path.dirname(f) + '</Filter>', file=flt)
+        print('      <Filter>' + join_dir('Source Files', os.path.dirname(f)) + '</Filter>', file=flt)
         print('    </ClCompile>', file=flt)
     print('  </ItemGroup>', file=flt)
     print('  <ItemGroup>', file=flt)
     for f in hdr:
         print('    <ClInclude Include="' + os.path.join(PREFIX, f) + '">', file=flt)
-        print('      <Filter>Header Files\\' + os.path.dirname(f) + '</Filter>', file=flt)
+        print('      <Filter>' + join_dir('Header Files', os.path.dirname(f)) + '</Filter>', file=flt)
         print('    </ClInclude>', file=flt)
     print('  </ItemGroup>', file=flt)
     flt.close()
