@@ -10,6 +10,8 @@ import uuid
 SRC_EXT = set([ '.' + e for e in [ 'cpp', 'c', 'cc', 'cxx', 'c++', 'cppm', 'ixx', 'odl', 'idl' ] ])
 HDR_EXT = set([ '.' + e for e in [ 'h', 'hh', 'hpp', 'hxx', 'h++', 'hm', 'inl', 'inc', 'ipp' ] ])
 
+PREFIX = ''
+
 def new_uuid():
     return '{' + str(uuid.uuid4()).upper() + '}'
 
@@ -30,7 +32,7 @@ def main():
     hdr = []
     ign = []
     for a in sys.argv[1:]:
-        for fn, ext in [ ( l, os.path.splitext(l)[1].lower() ) for l in  [ l.rstrip() for l in open(a).readlines() ] ]:
+        for fn, ext in [ ( l.replace('/', '\\'), os.path.splitext(l)[1].lower() ) for l in  [ l.rstrip() for l in open(a).readlines() ] ]:
             if ext in SRC_EXT:
                 src += [ fn ]
             elif ext in HDR_EXT:
@@ -62,11 +64,11 @@ def main():
     prj = open('out.vcxproj', 'w')
     print('  <ItemGroup>', file=prj)
     for f in src:
-        print('    <ClCompile Include="' + f + '" />', file=prj)
+        print('    <ClCompile Include="' + os.path.join(PREFIX, f) + '" />', file=prj)
     print('  </ItemGroup>', file=prj)
     print('  <ItemGroup>', file=prj)
     for f in hdr:
-        print('    <ClInclude Include="' + f + '" />', file=prj)
+        print('    <ClInclude Include="' + os.path.join(PREFIX, f) + '" />', file=prj)
     print('  </ItemGroup>', file=prj)
     prj.close()
 
@@ -83,14 +85,14 @@ def main():
     print('  </ItemGroup>', file=flt)
     print('  <ItemGroup>', file=flt)
     for f in src:
-        print('    <ClCompile Include="' + f + '">', file=flt)
-        print('    <Filter>Source Files\\' + os.path.dirname(f).replace('/', '\\') + '</Filter>', file=flt)
+        print('    <ClCompile Include="' + os.path.join(PREFIX, f) + '">', file=flt)
+        print('      <Filter>Source Files\\' + os.path.dirname(f) + '</Filter>', file=flt)
         print('    </ClCompile>', file=flt)
     print('  </ItemGroup>', file=flt)
     print('  <ItemGroup>', file=flt)
     for f in hdr:
-        print('    <ClInclude Include="' + f + '">', file=flt)
-        print('    <Filter>Header Files\\' + os.path.dirname(f).replace('/', '\\') + '</Filter>', file=flt)
+        print('    <ClInclude Include="' + os.path.join(PREFIX, f) + '">', file=flt)
+        print('      <Filter>Header Files\\' + os.path.dirname(f) + '</Filter>', file=flt)
         print('    </ClInclude>', file=flt)
     print('  </ItemGroup>', file=flt)
     flt.close()
