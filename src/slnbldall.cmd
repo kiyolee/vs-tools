@@ -18,7 +18,16 @@ goto :havemaxcpu
 set _MAXCPU_OPT=-m
 :havemaxcpu
 
-for %%p in ( Win32 x64 ) do (
+find /c "Release|ARM" %SLN% >nul:
+if errorlevel 1 goto :bldx86
+set _Platforms=ARM ARM64
+goto :start
+:bldx86
+set _Platforms=Win32 x64
+goto :start
+
+:start
+for %%p in ( %_Platforms% ) do (
   for %%c in ( Release Debug ) do (
     msbuild -t:%TARGET% -p:Platform=%%p -p:Configuration=%%c %_MAXCPU_OPT% %SLN%
   )
