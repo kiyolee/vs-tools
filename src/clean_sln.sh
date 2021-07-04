@@ -24,7 +24,9 @@ clean_sln(){
   fi
   find "$SLNDIR" -type f \( \
       -false \
+      -o -name '*.dll.recipe' \
       -o -name '*.embed.manifest' \
+      -o -name '*.exe.recipe' \
       -o -name '*.exp' \
       -o -name '*.extracted.manifest' \
       -o -name '*.idb' \
@@ -35,6 +37,7 @@ clean_sln(){
       -o -name '*.ipdb' \
       -o -name '*.lastbuildstate' \
       -o -name '*.lastcodeanalysissucceeded' \
+      -o -name '*.lib.recipe' \
       -o -name '*.log' \
       -o -name '*.nativecodeanalysis.all.xml' \
       -o -name '*.nativecodeanalysis.xml' \
