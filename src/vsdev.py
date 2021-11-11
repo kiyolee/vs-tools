@@ -202,7 +202,7 @@ def get_devenv_list():
     #
     # VS2003|2005|2008|2010|2012|2013|2015 (32-bit only)
     #
-    for vs_ver, vs_id in [ ( '7.0', 'vs2003' ),
+    for vs_ver, vs_id in ( ( '7.0', 'vs2003' ),
                            ( '7.1', 'vs2003' ),
                            ( '8.0', 'vs2005' ),
                            ( '9.0', 'vs2008' ),
@@ -210,7 +210,7 @@ def get_devenv_list():
                            ( '11.0', 'vs2012' ),
                            ( '12.0', 'vs2013' ),
                            ( '14.0', 'vs2015' ),
-                           ]:
+                           ):
         devenv_exe = get_devenv_exe(vs_ver)
         if devenv_exe: devenvs[vs_id] = devenv_exe
     #

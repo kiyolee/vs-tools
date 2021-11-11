@@ -239,7 +239,7 @@ def create_vcxproj(target, x64support):
     projname = os.path.basename(target)
     vcxproj_fn = target + '.vcxproj'
     vcxproj_filters_fn = vcxproj_fn + '.filters'
-    for fn in [ vcxproj_fn, vcxproj_filters_fn ]:
+    for fn in ( vcxproj_fn, vcxproj_filters_fn ):
         if os.path.exists(fn):
             print('%s already exists!' % fn)
             return

@@ -339,7 +339,7 @@ def create_vcxproj(target, x64support, src=None):
     sln_fn = os.path.join(basedir, slnname + '.sln')
     vcxproj_fn = os.path.join(projdir, projname + '.vcxproj')
     vcxproj_filters_fn = vcxproj_fn + '.filters'
-    for fn in [ sln_fn, vcxproj_fn, vcxproj_filters_fn ]:
+    for fn in ( sln_fn, vcxproj_fn, vcxproj_filters_fn ):
         if os.path.exists(fn):
             print('%s already exists!' % fn)
             return

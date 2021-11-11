@@ -25,7 +25,7 @@ def is_req_file(fn):
 def iter_files(prj):
     root = os.path.dirname(prj)
     rp = root if PREPEND_ROOT else ''
-    for l in [ l for l in [ l.strip() for l in open(prj) ] if is_file_line(l)]:
+    for l in ( l for l in ( l.strip() for l in open(prj) ) if is_file_line(l) ):
         s = l.split('"', 3)
         assert len(s) == 3
         fp = s[1].split('\\')

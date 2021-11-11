@@ -7,8 +7,8 @@ import os
 import sys
 import uuid
 
-SRC_EXT = set([ '.' + e for e in [ 'cpp', 'c', 'cc', 'cxx', 'c++', 'cppm', 'ixx', 'odl', 'idl' ] ])
-HDR_EXT = set([ '.' + e for e in [ 'h', 'hh', 'hpp', 'hxx', 'h++', 'hm', 'inl', 'inc', 'ipp' ] ])
+SRC_EXT = { '.' + e for e in ( 'cpp', 'c', 'cc', 'cxx', 'c++', 'cppm', 'ixx', 'odl', 'idl' ) }
+HDR_EXT = { '.' + e for e in ( 'h', 'hh', 'hpp', 'hxx', 'h++', 'hm', 'inl', 'inc', 'ipp' ) }
 
 PREFIX = ''
 
@@ -16,7 +16,7 @@ def new_uuid():
     return '{' + str(uuid.uuid4()).upper() + '}'
 
 def climb_dir(fn):
-    s = sum([ d.split('/') for d in os.path.dirname(fn).split(os.path.sep) ], [])
+    s = sum(( d.split('/') for d in os.path.dirname(fn).split(os.path.sep) ), [])
     for i in range(len(s)):
         yield os.path.sep.join(s[:i+1])
 
@@ -36,7 +36,7 @@ def main():
     hdr = []
     ign = []
     for a in sys.argv[1:]:
-        for fn, ext in [ ( l.replace('/', '\\'), os.path.splitext(l)[1].lower() ) for l in  [ l.rstrip() for l in open(a).readlines() ] ]:
+        for fn, ext in ( ( l.replace('/', '\\'), os.path.splitext(l)[1].lower() ) for l in ( l.rstrip() for l in open(a).readlines() ) ):
             if ext in SRC_EXT:
                 src += [ fn ]
             elif ext in HDR_EXT:

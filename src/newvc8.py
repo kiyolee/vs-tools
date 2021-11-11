@@ -528,7 +528,7 @@ def new_uuid():
 def create_vcproj(target, x64support):
     projname = os.path.basename(target)
     vcproj_fn = target + '.vcproj'
-    for fn in [ vcproj_fn ]:
+    for fn in ( vcproj_fn ):
         if os.path.exists(fn):
             print('%s already exists!' % fn)
             return
