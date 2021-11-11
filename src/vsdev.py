@@ -258,7 +258,7 @@ def print_devenvs(devenvs, devdef):
         print('No Visual Studio found.')
 
 def clean_env():
-    REMOVE_LIST = [ 'CommandPromptType',
+    REMOVE_LIST = ( 'CommandPromptType',
                     'DevEnvDir',
                     'ExtensionSdkDir',
                     'FSHARPINSTALLDIR',
@@ -305,7 +305,10 @@ def clean_env():
                     '__VSCMD_PREINIT_PATH',
                     '__VSCMD_PREINIT_VS150COMNTOOLS',
                     '__VSCMD_PREINIT_VS160COMNTOOLS',
-                    '__VSCMD_script_err_count' ]
+                    '__VSCMD_PREINIT_VS170COMNTOOLS',
+                    '__VSCMD_script_err_count',
+                    'is_x64_arch',
+                    )
     env = dict(nt.environ)
     km = dict([ ( k.upper(), k ) for k in env.keys() ])
     for i in ( km[k.upper()] for k in REMOVE_LIST if k.upper() in km ):
