@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# newvcx17.py
+# newvcx19.py
 #
 
 import sys
@@ -56,6 +56,7 @@ DEFAULT_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <StringPooling>true</StringPooling>
+      <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -70,6 +71,7 @@ DEFAULT_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <StringPooling>true</StringPooling>
+      <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -156,6 +158,7 @@ DEFAULT_VCXPROJ_64 = r'''<?xml version="1.0" encoding="utf-8"?>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <StringPooling>true</StringPooling>
+      <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -170,6 +173,7 @@ DEFAULT_VCXPROJ_64 = r'''<?xml version="1.0" encoding="utf-8"?>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <StringPooling>true</StringPooling>
+      <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -184,6 +188,7 @@ DEFAULT_VCXPROJ_64 = r'''<?xml version="1.0" encoding="utf-8"?>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <StringPooling>true</StringPooling>
+      <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -198,6 +203,7 @@ DEFAULT_VCXPROJ_64 = r'''<?xml version="1.0" encoding="utf-8"?>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <StringPooling>true</StringPooling>
+      <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
