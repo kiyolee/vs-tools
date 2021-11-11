@@ -1,5 +1,5 @@
 @echo off
-set _VSVER_=2019
+set _VSVER_=2022
 setlocal
 set _VSVER_TITLE_=VS%_VSVER_%
 set _GCT_=
@@ -18,7 +18,7 @@ title %_CONTITLE_%
 endlocal
 pushd .
 if exist "%~dp0vcvarsreset.cmd" call "%~dp0vcvarsreset.cmd"
-set _VCVARS_HEAD_=%ProgramFiles(x86)%\Microsoft Visual Studio\%_VSVER_%
+set _VCVARS_HEAD_=%ProgramFiles%\Microsoft Visual Studio\%_VSVER_%
 set _VCVARS_TAIL_=VC\Auxiliary\Build\vcvarsamd64_x86.bat
 if exist "%_VCVARS_HEAD_%\Enterprise\%_VCVARS_TAIL_%" goto :ente
 if exist "%_VCVARS_HEAD_%\Professional\%_VCVARS_TAIL_%" goto :prof

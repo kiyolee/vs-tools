@@ -47,7 +47,9 @@ set __DOTNET_PREFERRED_BITNESS=
 set __VSCMD_PREINIT_PATH=
 set __VSCMD_PREINIT_VS150COMNTOOLS=
 set __VSCMD_PREINIT_VS160COMNTOOLS=
+set __VSCMD_PREINIT_VS170COMNTOOLS=
 set __VSCMD_script_err_count=
+set is_x64_arch=
 
-@rem This gets reset by VS2017.
+@rem This gets reset by VS2017 or later.
 set PreferredToolArchitecture=x64

@@ -32,8 +32,8 @@ usage 1: %(__file__)s [options] [devenv-options ...]
 options:
     --msvc6, --vc6
         Start MSVC6 if available.
-    --vs(2003|2005|2008|2010|2012|2013|2015|2017|2019)
-    --(2003|2005|2008|2010|2012|2013|2015|2017|2019)
+    --vs(2003|2005|2008|2010|2012|2013|2015|2017|2019|2022)
+    --(2003|2005|2008|2010|2012|2013|2015|2017|2019|2022)
         Start specific version of Visual Studio if available.
     -h, --help
         Print this help.
@@ -308,7 +308,7 @@ def clean_env():
                     '__VSCMD_script_err_count' ]
     env = dict(nt.environ)
     km = dict([ ( k.upper(), k ) for k in env.keys() ])
-    for i in [ km[k.upper()] for k in REMOVE_LIST if k.upper() in km ]:
+    for i in ( km[k.upper()] for k in REMOVE_LIST if k.upper() in km ):
         del env[i]
     def _envkey(k):
         return km.get(k.upper(), k)
