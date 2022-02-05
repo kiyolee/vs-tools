@@ -18,6 +18,8 @@ goto :havemaxcpu
 set _MAXCPU_OPT=-m
 :havemaxcpu
 
+if not exist %SLN% goto :notexist
+
 find /c "Release|ARM" %SLN% >nul:
 if errorlevel 1 goto :bldx86
 set _Platforms=ARM ARM64
@@ -32,6 +34,11 @@ for %%p in ( %_Platforms% ) do (
     msbuild -t:%TARGET% -p:Platform=%%p -p:Configuration=%%c %_MAXCPU_OPT% %SLN%
   )
 )
+
+goto :end
+
+:notexist
+echo %SLN% does not exist
 
 :end
 endlocal
