@@ -34,6 +34,8 @@ goto :end
 call "%_VCVARS_HEAD_%\Community\%_VCVARS_TAIL_%" %*
 goto :end
 :end
+@rem This gets reset by VS2017 or later.
+set PreferredToolArchitecture=x64
 set _VSVER_=
 set _VCVARS_HEAD_=
 set _VCVARS_TAIL_=

@@ -49,6 +49,7 @@ set __VSCMD_PREINIT_VS150COMNTOOLS=
 set __VSCMD_PREINIT_VS160COMNTOOLS=
 set __VSCMD_PREINIT_VS170COMNTOOLS=
 set __VSCMD_script_err_count=
+set __devinit_path=
 set is_x64_arch=
 
 @rem This gets reset by VS2017 or later.
