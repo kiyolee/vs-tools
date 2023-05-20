@@ -40,6 +40,7 @@ clean_sln(){
       -o -name '*.lib.recipe' \
       -o -name '*.log' \
       -o -name '*.nativecodeanalysis.all.xml' \
+      -o -name '*.nativecodeanalysis.sarif' \
       -o -name '*.nativecodeanalysis.xml' \
       -o -name '*.obj' \
       -o -name '*.pdb' \
