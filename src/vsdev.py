@@ -336,7 +336,7 @@ def clean_env():
             if kv in env: return env[kv]
             s = m.span('var')
             return m.string[s[0]-1:s[1]+1]
-        pat = re.compile('%(?P<var>\w*)%')
+        pat = re.compile(r'%(?P<var>\w*)%')
         env[_envkey('Path')] = ';'.join([ re.sub(pat, _repl, p ) for p in ( syspath.split(';') + usrpath.split(';') ) if p ])
     return env
 
