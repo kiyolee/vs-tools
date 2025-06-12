@@ -20,16 +20,35 @@ set _MAXCPU_OPT=-m
 
 if not exist %SLN% goto :notexist
 
-find /c "Release|ARM" %SLN% >nul:
-if errorlevel 1 goto :bldx86
-set _Platforms=ARM ARM64
-goto :start
-:bldx86
-set _Platforms=Win32 x64
-goto :start
+set _Platform_arm32=
+set _Platform_arm64=
+set _Platform_win32=
+set _Platform_x86=
+set _Platform_x64=
+
+find /c "Release|ARM." %SLN% >nul:
+if errorlevel 1 goto :noarm32
+set _Platform_arm32=ARM
+:noarm32
+find /c "Release|ARM64." %SLN% >nul:
+if errorlevel 1 goto :noarm64
+set _Platform_arm64=ARM64
+:noarm64
+find /c "Release|Win32." %SLN% >nul:
+if errorlevel 1 goto :nowin32
+set _Platform_win32=Win32
+:nowin32
+find /c "Release|x86." %SLN% >nul:
+if errorlevel 1 goto :nox86
+set _Platform_x86=x86
+:nox86
+find /c "Release|x64." %SLN% >nul:
+if errorlevel 1 goto :nox64
+set _Platform_x64=x64
+:nox64
 
 :start
-for %%p in ( %_Platforms% ) do (
+for %%p in ( %_Platform_x64% %_Platform_x86% %_Platform_win32% %_Platform_arm64% %_Platform_arm32% ) do (
   for %%c in ( Release Debug ) do (
     msbuild -t:%TARGET% -p:Platform=%%p -p:Configuration=%%c %_MAXCPU_OPT% %SLN%
   )
