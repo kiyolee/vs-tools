@@ -2,6 +2,7 @@ if "%PATH_PRE_VC%" == "" set PATH_PRE_VC=%PATH%
 Path %PATH_PRE_VC%
 set CommandPromptType=
 set DevEnvDir=
+set EXTERNAL_INCLUDE=
 set ExtensionSdkDir=
 set FSHARPINSTALLDIR=
 set Framework35Version=
@@ -44,10 +45,12 @@ set WindowsSdkVerBinPath=
 set __DOTNET_ADD_32BIT=
 set __DOTNET_ADD_64BIT=
 set __DOTNET_PREFERRED_BITNESS=
+set __VSCMD_PREINIT_EXTERNAL_INCLUDE=
 set __VSCMD_PREINIT_PATH=
 set __VSCMD_PREINIT_VS150COMNTOOLS=
 set __VSCMD_PREINIT_VS160COMNTOOLS=
 set __VSCMD_PREINIT_VS170COMNTOOLS=
+set __VSCMD_PREINIT_VS180COMNTOOLS=
 set __VSCMD_script_err_count=
 set __devinit_path=
 set is_x64_arch=
