@@ -4,7 +4,7 @@
 #
 # MIT License
 #
-# Copyright (c) 2020 Kelvin Lee
+# Copyright (c) 2020-2025 Kelvin Lee
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -32,8 +32,8 @@ usage 1: %(__file__)s [options] [devenv-options ...]
 options:
     --msvc6, --vc6
         Start MSVC6 if available.
-    --vs(2003|2005|2008|2010|2012|2013|2015|2017|2019|2022)
-    --(2003|2005|2008|2010|2012|2013|2015|2017|2019|2022)
+    --vs(2003|2005|2008|2010|2012|2013|2015|2017|2019|2022|2026)
+    --(2003|2005|2008|2010|2012|2013|2015|2017|2019|2022|2026)
         Start specific version of Visual Studio if available.
     -h, --help
         Print this help.
@@ -183,6 +183,8 @@ def vswhere_get_devenv_exe(devenvs, pf32, pf64):
                 except StopIteration:
                     pass
                 if pp and pv:
+                    if pv == '18':
+                        pv = '2026'
                     pv = 'vs' + pv
                     for i in range(1, 99):
                         vs_id = pv if i == 1 else pv + ('_%d' % i)
@@ -260,6 +262,7 @@ def print_devenvs(devenvs, devdef):
 def clean_env():
     REMOVE_LIST = ( 'CommandPromptType',
                     'DevEnvDir',
+                    'EXTERNAL_INCLUDE',
                     'ExtensionSdkDir',
                     'FSHARPINSTALLDIR',
                     'Framework35Version',
@@ -302,11 +305,14 @@ def clean_env():
                     '__DOTNET_ADD_32BIT',
                     '__DOTNET_ADD_64BIT',
                     '__DOTNET_PREFERRED_BITNESS',
+                    '__VSCMD_PREINIT_EXTERNAL_INCLUDE',
                     '__VSCMD_PREINIT_PATH',
                     '__VSCMD_PREINIT_VS150COMNTOOLS',
                     '__VSCMD_PREINIT_VS160COMNTOOLS',
                     '__VSCMD_PREINIT_VS170COMNTOOLS',
+                    '__VSCMD_PREINIT_VS180COMNTOOLS',
                     '__VSCMD_script_err_count',
+                    '__devinit_path',
                     'is_x64_arch',
                     )
     env = dict(nt.environ)
