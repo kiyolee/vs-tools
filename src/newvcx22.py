@@ -21,7 +21,7 @@ DEFAULT_VCXPROJ = r'''<?xml version="1.0" encoding="utf-8"?>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>%{PROJGUID}%</ProjectGuid>
     <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
@@ -106,7 +106,7 @@ DEFAULT_VCXPROJ_64 = r'''<?xml version="1.0" encoding="utf-8"?>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>%{PROJGUID}%</ProjectGuid>
     <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
