@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# newvcx19.py
+# newapp26.py
 #
 
 import sys
@@ -29,7 +29,7 @@ DEFAULT_VCXPROJ_x86_x64 = r'''<?xml version="1.0" encoding="utf-8"?>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>%{PROJGUID}%</ProjectGuid>
     <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
@@ -37,23 +37,23 @@ DEFAULT_VCXPROJ_x86_x64 = r'''<?xml version="1.0" encoding="utf-8"?>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -135,7 +135,7 @@ DEFAULT_VCXPROJ_x86_x64 = r'''<?xml version="1.0" encoding="utf-8"?>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+%{PROJSRC}%  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>'''
@@ -153,7 +153,7 @@ DEFAULT_VCXPROJ_x86 = r'''<?xml version="1.0" encoding="utf-8"?>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>%{PROJGUID}%</ProjectGuid>
     <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
@@ -161,12 +161,12 @@ DEFAULT_VCXPROJ_x86 = r'''<?xml version="1.0" encoding="utf-8"?>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -212,7 +212,7 @@ DEFAULT_VCXPROJ_x86 = r'''<?xml version="1.0" encoding="utf-8"?>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+%{PROJSRC}%  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>'''
@@ -230,7 +230,7 @@ DEFAULT_VCXPROJ_x64 = r'''<?xml version="1.0" encoding="utf-8"?>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>%{PROJGUID}%</ProjectGuid>
     <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
@@ -238,12 +238,12 @@ DEFAULT_VCXPROJ_x64 = r'''<?xml version="1.0" encoding="utf-8"?>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -289,7 +289,7 @@ DEFAULT_VCXPROJ_x64 = r'''<?xml version="1.0" encoding="utf-8"?>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+%{PROJSRC}%  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>'''
@@ -307,7 +307,7 @@ DEFAULT_VCXPROJ_arm64 = r'''<?xml version="1.0" encoding="utf-8"?>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>%{PROJGUID}%</ProjectGuid>
     <RootNamespace>%{PROJNAME}%</RootNamespace>
   </PropertyGroup>
@@ -315,12 +315,12 @@ DEFAULT_VCXPROJ_arm64 = r'''<?xml version="1.0" encoding="utf-8"?>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -366,7 +366,7 @@ DEFAULT_VCXPROJ_arm64 = r'''<?xml version="1.0" encoding="utf-8"?>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+%{PROJSRC}%  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>'''
@@ -387,7 +387,135 @@ DEFAULT_VCXPROJ_FILTERS = r'''<?xml version="1.0" encoding="utf-8"?>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
-</Project>'''
+%{PROJFILTSRC}%</Project>'''
+
+DEFAULT_SLN_x86_x64 = r'''
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("%{SLN_PROJGUID_U}%") = "%{PROJNAME}%", "%{PROJNAME}%\%{PROJNAME}%.vcxproj", "%{PROJGUID_U}%"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		%{PROJGUID_U}%.Debug|Win32.ActiveCfg = Debug|Win32
+		%{PROJGUID_U}%.Debug|Win32.Build.0 = Debug|Win32
+		%{PROJGUID_U}%.Debug|x64.ActiveCfg = Debug|x64
+		%{PROJGUID_U}%.Debug|x64.Build.0 = Debug|x64
+		%{PROJGUID_U}%.Release|Win32.ActiveCfg = Release|Win32
+		%{PROJGUID_U}%.Release|Win32.Build.0 = Release|Win32
+		%{PROJGUID_U}%.Release|x64.ActiveCfg = Release|x64
+		%{PROJGUID_U}%.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = %{SLNGUID_U}%
+	EndGlobalSection
+EndGlobal
+'''
+
+DEFAULT_SLN_x86 = r'''
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("%{SLN_PROJGUID_U}%") = "%{PROJNAME}%", "%{PROJNAME}%\%{PROJNAME}%.vcxproj", "%{PROJGUID_U}%"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		%{PROJGUID_U}%.Debug|Win32.ActiveCfg = Debug|Win32
+		%{PROJGUID_U}%.Debug|Win32.Build.0 = Debug|Win32
+		%{PROJGUID_U}%.Release|Win32.ActiveCfg = Release|Win32
+		%{PROJGUID_U}%.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = %{SLNGUID_U}%
+	EndGlobalSection
+EndGlobal
+'''
+
+DEFAULT_SLN_x64 = r'''
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("%{SLN_PROJGUID_U}%") = "%{PROJNAME}%", "%{PROJNAME}%\%{PROJNAME}%.vcxproj", "%{PROJGUID_U}%"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		%{PROJGUID_U}%.Debug|x64.ActiveCfg = Debug|x64
+		%{PROJGUID_U}%.Debug|x64.Build.0 = Debug|x64
+		%{PROJGUID_U}%.Release|x64.ActiveCfg = Release|x64
+		%{PROJGUID_U}%.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = %{SLNGUID_U}%
+	EndGlobalSection
+EndGlobal
+'''
+
+DEFAULT_SLN_arm64 = r'''
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("%{SLN_PROJGUID_U}%") = "%{PROJNAME}%", "%{PROJNAME}%\%{PROJNAME}%.vcxproj", "%{PROJGUID_U}%"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Release|ARM64 = Release|ARM64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		%{PROJGUID_U}%.Debug|ARM64.ActiveCfg = Debug|ARM64
+		%{PROJGUID_U}%.Debug|ARM64.Build.0 = Debug|ARM64
+		%{PROJGUID_U}%.Release|ARM64.ActiveCfg = Release|ARM64
+		%{PROJGUID_U}%.Release|ARM64.Build.0 = Release|ARM64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = %{SLNGUID_U}%
+	EndGlobalSection
+EndGlobal
+'''
+
+VCXPROJ_SRC_F = r'''  <ItemGroup>
+    <ClCompile Include="'''
+VCXPROJ_SRC_B =  r'''" />
+  </ItemGroup>
+'''
+
+VCXPROJ_FILTERS_SRC_F = r'''  <ItemGroup>
+    <ClCompile Include="'''
+VCXPROJ_FILTERS_SRC_B = r'''">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+'''
 
 def format_text(fn, text, param):
     var_pat = re.compile(r'%{(?P<var>\w+)}%')
@@ -401,37 +529,92 @@ def format_text(fn, text, param):
 def new_uuid():
     return '{' + str(uuid.uuid4()).upper() + '}'
 
-def create_vcxproj(target, default_vcxproj):
-    projname = os.path.basename(target)
-    vcxproj_fn = target + '.vcxproj'
+def create_vcxproj(target, default_sln, default_vcxproj, src=None):
+    if os.path.isdir(target):
+        basedir = target
+        slnname = ''
+    else:
+        basedir = os.path.dirname(target)
+        if not basedir: basedir = os.curdir
+        slnname = os.path.basename(target)
+    if src:
+        src_bn = os.path.basename(src)
+        projname = os.path.splitext(src_bn)[0]
+        if not slnname: slnname = projname
+    else:
+        projname = slnname
+    if not slnname:
+        print('Solution name not given or could not be deduced.', file=sys.stderr)
+        return
+    if not projname:
+        print('Project name not given or could not be deduced.', file=sys.stderr)
+        return
+    projdir = os.path.join(basedir, projname)
+    sln_fn = os.path.join(basedir, slnname + '.sln')
+    vcxproj_fn = os.path.join(projdir, projname + '.vcxproj')
     vcxproj_filters_fn = vcxproj_fn + '.filters'
-    for fn in ( vcxproj_fn, vcxproj_filters_fn ):
+    for fn in ( sln_fn, vcxproj_fn, vcxproj_filters_fn ):
         if os.path.exists(fn):
             print('%s already exists!' % fn)
             return
-    param = { 'PROJNAME': projname, 'PROJGUID': new_uuid() }
+    slnguid = new_uuid()
+    sln_projguid = new_uuid()
+    projguid = new_uuid()
+    if src:
+        if os.path.isfile(src):
+            src_fn = os.path.relpath(src, projdir)
+        else:
+            src_basedir = os.path.dirname(src)
+            if os.path.isdir(src_basedir):
+                src_bn = os.path.basename(src)
+                src_fn = os.path.join(os.path.relpath(src_basedir, projdir), src_bn)
+            else:
+                src_fn = src
+        projsrc = (VCXPROJ_SRC_F + src_fn + VCXPROJ_SRC_B)
+        projfiltsrc = (VCXPROJ_FILTERS_SRC_F + src_fn + VCXPROJ_FILTERS_SRC_B)
+    else:
+        projsrc = ''
+        projfiltsrc = ''
+    param = { 'SLNNAME': slnname,
+              'SLNGUID': slnguid, 'SLNGUID_U': slnguid.upper(),
+              'SLN_PROJGUID': sln_projguid, 'SLN_PROJGUID_U': sln_projguid.upper(),
+              'PROJNAME': projname,
+              'PROJGUID': projguid, 'PROJGUID_U': projguid.upper(),
+              'PROJSRC': projsrc, 'PROJFILTSRC': projfiltsrc
+               }
     try:
+        if not os.path.isdir(projdir):
+            os.makedirs(projdir)
+        format_text(sln_fn, default_sln, param)
         format_text(vcxproj_fn, default_vcxproj, param)
         format_text(vcxproj_filters_fn, DEFAULT_VCXPROJ_FILTERS, param)
-        print('created %s and %s.' % ( vcxproj_fn, vcxproj_filters_fn ))
+        print('created %s, %s and %s.' % ( sln_fn, vcxproj_fn, vcxproj_filters_fn ))
     except IOError as e:
         print(e)
 
 def main():
     args = sys.argv[1:]
+    default_sln = DEFAULT_SLN_x86_x64
     default_vcxproj = DEFAULT_VCXPROJ_x86_x64
     if len(args) > 0:
         if args[0] in ( '-32', '-x86' ):
+            default_sln = DEFAULT_SLN_x86
             default_vcxproj = DEFAULT_VCXPROJ_x86
             args = args[1:]
         elif args[0] in ( '-64', '-x64' ):
+            default_sln = DEFAULT_SLN_x64
             default_vcxproj = DEFAULT_VCXPROJ_x64
             args = args[1:]
         elif args[0] in ( '-arm64' ):
+            default_sln = DEFAULT_SLN_arm64
             default_vcxproj = DEFAULT_VCXPROJ_arm64
             args = args[1:]
-    for a in args:
-        create_vcxproj(a, default_vcxproj)
+    if len(args) == 1:
+        create_vcxproj(args[0], default_sln, default_vcxproj)
+    elif len(args) == 2:
+        create_vcxproj(args[0], default_sln, default_vcxproj, args[1])
+    else:
+        print('Too many arguments.', file=sys.stderr)
     return 0
 
 if __name__ == '__main__':
